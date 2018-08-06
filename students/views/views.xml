@@ -1,0 +1,86 @@
+<openerb>
+  <data>
+    <!--&lt;!&ndash; Form view for student  &ndash;&gt;
+    <record id="student_form_view" model="ir.ui.view">
+        <field name="name">student.form.view</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                  <field name="image" wiget="image" class="oe.left oe.avatar"/>
+                  <h>
+                    <field name="name" placeholder="Your Name"/>
+                  </h>
+                    <group string="Student Information">
+                      <group>
+                        <field name="email"/>
+                        <field name="contact"/>
+                        <field name="dob"/>
+                        <field name="course_id"/>
+                      </group>
+                      <group>
+                        <field name="registration_date"/>
+                        <field name="gender"/>
+                        <field name="is_physically_disabled"/>
+                        <field name="hobby_ids" widget="many2many_tags"></field>
+                      </group>
+                    </group>
+                  <notebook>
+                    <page string="Qualification">
+                      <field name="qualification_ids">
+                        <form>
+                          <group>
+                            <field naame="course_id"/>
+                            <field name="year_cleared"/>
+                            <field name="grade"/>
+                          </group>
+                        </form>
+                        <tree>
+                          <field name="course_id"/>
+                          <field name="year_cleared"/>
+                          <field name="grade"/>
+                        </tree>
+                      </field>
+                    </page>
+                  </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    &lt;!&ndash; Tree View for Student Information &ndash;&gt;
+    <record id="student_tree_view" model="ir.ui.view">
+      <field name="name">student.tree.view</field>
+      <field name="model">student.student</field>
+      <field name= "arch" type = "xml">
+        <tree string="Student Information">
+          <field name="name"/>
+          <field name="email"/>
+          <field name="contact"/>
+          <field name="dob"/>
+          <field name="course_id"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    &lt;!&ndash; Action for Student Information &ndash;&gt;
+    <record id="action_student_information" model="ir.actions.act_window">
+      <field name="name">Student Information</field>
+      <field name="res_model">student.student</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    &lt;!&ndash; Top bar menu &ndash;&gt;
+    <menuitem id="menu_college_main" name="College"/>
+    &lt;!&ndash; Left 2589*-+0Sidebar MenuHead &ndash;&gt;
+    <menuitem id="menu_student_main" name="Student" parent="menu_college_main"/>
+    &lt;!&ndash; Left Sidebar Menu &ndash;&gt;
+    <menuitem id="menu_student_info" parent="menu_student_main" action="action_student_information"/>-->
+  </data>
+</openerb>

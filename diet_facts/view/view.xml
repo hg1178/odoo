@@ -1,0 +1,109 @@
+<openerp>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_form_view" model="ir.ui.view">
+            <field name="name">product.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <field name="type" position="after">
+                    <field name="calories"/>
+                    <field name="servingsize"/>
+                    <field name="lastupdate"/>
+                    <field name="dietitem"/>
+                </field>
+
+
+            </field>
+        </record>
+
+        <record id="diet_facts_form_view" model="ir.ui.view">
+            <field name="name">deit.facts.form.view</field>
+            <field name="model">res.users.meal</field>
+            <field name="view_type">form</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="meal_date"/>
+                            <field name="user_id"/>
+                            <field name="totalcalories"/>
+                            <field name="notes"/>
+                            <field name="largemeal"/>
+                        </group>
+
+                    <notebook>
+                        <page name="mealitem" string="Meal Items">
+                            <field name="item_ids" widget="one2many_list">
+                            <tree string="menu items" editable="bottom">
+                                <field name="item_id"/>
+                                <field name="servings"/>
+                                <field name="calories"/>
+                                <field name="notes"/>
+                            </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_tree_view" model="ir.ui.view">
+            <field name="name">product.tree.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="standard_price" position="after">
+                    <field name="calories"/>
+                    <field name="servingsize"/>
+                    <field name="lastupdate"/>
+                </field>
+
+            </field>
+        </record>
+        <record id="product.product_template_action_dietfacts" model="ir.actions.act_window">
+            <field name="name">Menu Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">form,tree,kanban,graph</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref= "product.product_template_kanban_view"  />
+            <field name="context" >{"search_default_filter_to_sell":1, "default_dietitem":True}</field>
+            <field name="domain">[('dietitem','=',True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+                  Click to define new product
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+                The product form contains information to simplify the sale process
+              </p>
+            </field>
+        </record>
+
+        <record id="meal_action_dietfact" model="ir.actions.act_window">
+            <field name="name">Meal Name</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.users.meal</field>
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                 Clic to define new menu
+              </p>
+            </field>
+        </record>
+
+
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="diet_facts_menu_item" parent="base.menu_sales" action="product.product_template_action_dietfacts" sequence="14"/>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_meal_action_dietfact" parent="diet_facts_menu_item" action="meal_action_dietfact" sequence="15"/>
+    </data>
+</openerp>

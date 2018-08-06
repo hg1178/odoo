@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+
+        <record id="wizard_view" model="ir.ui.view">
+            <field name="name">wizard.view</field>
+            <field name="model">wiz.age</field>
+            <field name="arch" type="xml">
+                <form string="Calculate Student Age">
+                    <header>
+                    <separator string="Calculate Student Age For All DOB Between Dates"/>
+                    <group col="4">
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                    </group>
+                    </header>
+                    <footer>
+                        <button name="calc_age" string="Calculate Age" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+
+        <record id="wiz_calc_age_action" model="ir.actions.act_window">
+            <field name="name">Calculate Age</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wiz.age</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="wiz_calc_age_menu" string="Calculate Age" parent="student_root" action="wiz_calc_age_action" />
+
+        <act_window
+            id="action_wiz_calc_age"
+            res_model="wiz.age"
+            src_model="student.student"
+            target="new"
+            name="Calc Age"
+            view_mode="form"
+            key2="client_action_multi"/>
+
+    </data>
+</openerp>
